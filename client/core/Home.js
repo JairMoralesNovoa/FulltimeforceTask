@@ -6,6 +6,7 @@ import { CardActions } from '@material-ui/core';
 import { Typography } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import getCommits from "../commits/api-commit.js";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -22,13 +23,21 @@ const useStyles = makeStyles(theme => ({
 function Home () {
     const classes = useStyles();
 
+    getCommits().then((data) => {
+        if (data && data.error){
+            console.log(data.error);
+        } else {
+            console.log(data);
+        }
+    });
+
     return(
         <Card className={classes.card}>
             <Typography variant='h6' className={classes.title}>
                 Commite Tittle
             </Typography>
             <CardContent>
-                <Typography variant='boddy2' component='p'>
+                <Typography variant='body2' component='p'>
                     Author
                 </Typography>
             </CardContent>
