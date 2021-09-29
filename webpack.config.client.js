@@ -32,8 +32,11 @@ const config = {
                 use: [
                     'babel-loader'
                 ]
+            },
+            {
+                test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
+                use: 'file-loader'
             }
-            
         ]
     },
     plugins: [
@@ -44,7 +47,7 @@ const config = {
         alias: {
             'react-dom': '@hot-loader/react-dom'
         }
-    }
+    },
 };
 
 module.exports = config;
