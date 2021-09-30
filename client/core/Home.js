@@ -1,54 +1,66 @@
-import React from "react";
-import { CardContent } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { Card } from "@material-ui/core";
-import { CardActions } from '@material-ui/core';
+import { Paper } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import CallMadeIcon from '@material-ui/icons/CallMade';
+import { List } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
+import CommitCard from "../commits/commit-card.js";
 import getCommits from "../commits/api-commit.js";
 
-const useStyles = makeStyles(theme => ({
-    card: {
-        maxWidth: 600,
-        margin: 'auto',
-        marginTop: theme.spacing(5),
+const useStyles = makeStyles((theme) => ({
+    root: {
+        height: '100%',
+        padding: theme.spacing(1),
+        margin: theme.spacing(5,25),
+        backgroundColor: theme.palette.secondary.light,
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")'
     },
     title: {
-        padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
-        color: theme.palette.openTitle
-    }
+        margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
+        color: theme.palette.openTitle,
+        textAlign: 'center'
+    },
 }));
 
-function Home () {
+function Home() {
     const classes = useStyles();
+    const [commits, setCommits] = useState([]);
 
-    getCommits().then((data) => {
-        if (data && data.error){
-            console.log(data.error);
-        } else {
-            console.log(data);
-        }
-    });
+    //print data of commits get by the getCommits async function
+    useEffect(() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
 
-    return(
-        <Card className={classes.card}>
-            <Typography variant='h6' className={classes.title}>
-                Commite Tittle
+        getCommits(signal).then((data) => {
+            if (data && data.error) {
+                console.log(data.error);
+            } else {
+                setCommits(data[0]);
+                console.log(data[1]);
+            }
+        });
+
+        return function cleanup() {
+            abortController.abort();
+        };
+    }, []);
+
+    return (
+        <Paper className={classes.root} elevation={6}>
+            <Typography variant="h4" className={classes.title}>
+                Commits from JairMoralesNovoa/FulltimeforceTask
             </Typography>
-            <CardContent>
-                <Typography variant='body2' component='p'>
-                    Author
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <IconButton aria-label='link'>
-                    <CallMadeIcon />
-                </IconButton>
-            </CardActions>
-        </Card>
-    )
-
+            <List dense>
+                {commits.map((item, i) => {
+                    return (
+                        <ListItem key={i}>
+                            <CommitCard tittle={item.message[0]} author={item.name} url={item.url} date={item.date}/>
+                        </ListItem>
+                    )
+                })}
+            </List>
+        </Paper>
+    );
 }
 
 export default Home;
