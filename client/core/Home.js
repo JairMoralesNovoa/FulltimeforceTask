@@ -59,7 +59,7 @@ function Home() {
                 {commits.map((item, i) => {
                     return (
                         <ListItem key={i}>
-                            <CommitCard tittle={item.message[0]} author={item.name} url={item.url} date={item.date}/>
+                            <CommitCard tittle={item.tittle} author={item.name} url={item.url} date={item.date} message={item.message} />
                         </ListItem>
                     )
                 })}

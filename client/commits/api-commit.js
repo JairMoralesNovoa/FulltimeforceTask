@@ -23,8 +23,11 @@ const getCommits = async (signal) => {
         
         result.items.forEach(i => {
             const messages = i.commit.message.split('\n- ');
+            const tittle = messages[0];
+            messages.shift();
             const simpleDate= i.commit.author.date.split('.')[0].replace('T',' ');
             const commit = {
+                tittle: tittle,
                 name: i.author.login,
                 message: messages,
                 url: i.html_url,
