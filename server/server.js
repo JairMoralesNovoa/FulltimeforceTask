@@ -1,8 +1,11 @@
 //import to run server
-//devBundle only on development (comment on prod)
+import dotenv from 'dotenv';
+dotenv.config();
 import express from "express";
-import devBundle from "./devBundle.js";
 import template from "../template.js";
+
+//devBundle only on development (comment on prod)
+import devBundle from "./devBundle.js";
 
 const path = require('path');
 
@@ -11,6 +14,8 @@ const CURRENT_WORKING_DIR = process.cwd()
 
 //Create express instance and 
 const app = express();
+
+//devBundle only on development (comment on prod)
 devBundle.compile(app);
 
 //static folder definition
