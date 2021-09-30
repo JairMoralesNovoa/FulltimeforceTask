@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
         padding: `${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.primary.contrastText,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 600,
     },
     icon: {
-        fontSize: `1.2rem`,
-        edge: 'end'
+        fontSize: `1.2rem`
     },
     iconButton: {
         padding: `${theme.spacing(0)}px`,

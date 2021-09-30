@@ -4,6 +4,7 @@ import { pink } from "@material-ui/core/colors";
 const theme = createTheme({
   typography: {
     useNextVariants: true,
+    fontFamily: "'Montserrat', sans-serif"
   },
   palette: {
     primary: {

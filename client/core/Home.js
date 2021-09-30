@@ -9,7 +9,7 @@ import getCommits from "../commits/api-commit.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '100%',
+        minWidth: 300,
         padding: theme.spacing(1),
         margin: theme.spacing(5,25),
         backgroundColor: theme.palette.secondary.light,
@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     title: {
         margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
         color: theme.palette.openTitle,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 700,
     },
 }));
 
@@ -48,7 +49,11 @@ function Home() {
     return (
         <Paper className={classes.root} elevation={6}>
             <Typography variant="h4" className={classes.title}>
-                Commits from JairMoralesNovoa/FulltimeforceTask
+                COMMITS
+                <br />
+                JairMoralesNovoa
+                <br />
+                FulltimeforceTask
             </Typography>
             <List dense>
                 {commits.map((item, i) => {
