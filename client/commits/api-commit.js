@@ -25,7 +25,8 @@ const getCommits = async (signal) => {
             const messages = i.commit.message.split('\n- ');
             const tittle = messages[0];
             messages.shift();
-            const simpleDate= i.commit.author.date.split('.')[0].replace('T',' ');
+            //const simpleDate= i.commit.author.date.split('.')[0].replace('T',' ');
+            const simpleDate= i.commit.author.date.split('.')[0];
             const commit = {
                 tittle: tittle,
                 name: i.author.login,
@@ -36,6 +37,7 @@ const getCommits = async (signal) => {
             commits.push(commit);
         });
 
+        commits.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         return [commits.reverse(),result];
 
     } catch(err) {

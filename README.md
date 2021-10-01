@@ -98,9 +98,10 @@ To deploy the app in production follow the previous steps 1-2-3 if you haven't d
 ## Observations
 
 The model of commits is as follows:
-
-< TITLE OF COMMIT >
-< - Commit datail >
-< - Commit datail >
-< - Commit datail >
-< - Commit datail >
+```js
+TITLE OF COMMIT
+- Commit datail 
+- Commit datail 
+- Commit datail 
+- Commit datail 
+```
